@@ -1,4 +1,4 @@
-interface Location {
+export interface Location {
     lat: number;
     lng: number;
     city: string;
@@ -8,7 +8,7 @@ interface Location {
     countryName: string;
   }
   
-  interface Image {
+  export interface Image {
     url: string;
     is_portrait: boolean;
     position: number;
@@ -16,7 +16,7 @@ interface Location {
     tags?: any[];
   }
   
-  interface Space {
+  export interface Space {
     icon: string;
     name: string;
     name_plural: string;
@@ -24,12 +24,12 @@ interface Location {
     value: number;
   }
   
-  interface Amenity {
+  export interface Amenity {
     icon: string;
     name: string;
   }
   
-  interface UnitGroup {
+  export interface UnitGroup {
     id: number;
     title: string;
     description: string;
@@ -46,7 +46,7 @@ interface Location {
     images: Image[];
   }
   
-  interface PropertyDetails {
+  export interface PropertyDetails {
     id: number;
     external_id: string;
     review_widget_id: string;
