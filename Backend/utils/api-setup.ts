@@ -13,19 +13,33 @@ export class ApiSetup {
       });
     }
 
+    /**
+     * Fetches property details for a given property ID.
+     * @param id The ID of the property to fetch details for.
+     * @returns A Promise resolving to PropertyDetails object containing property information.
+     */
     public async getPropertyDetails(id: number): Promise<PropertyDetails> {
         const data = await this.fetchData(this.context, `/properties/v1/public/properties/${id}`);
         return data.payload;
     }
-
+    /**
+     * Performs an HTTP GET request to fetch data from the specified URL.
+     * @param apiRequestContext Promise resolving to APIRequestContext for making API requests.
+     * @param url The URL to fetch data from.
+     * @returns A Promise resolving to the JSON response data.
+     */
     public async fetchData(apiRequestContext: Promise<APIRequestContext>, url: string) {
-        const context = await apiRequestContext;
-        const response = await context.get(url);
+      // Wait for API request context to resolve
+      const context = await apiRequestContext;
 
-        // The response status should be 200, otherwise the test will fail
-        expect(response.status()).toBe(200);
+      // Send a GET request to the specified URL
+      const response = await context.get(url);
+
+      // Assert that the response status is 200 (OK), failing the test if it's not
+      expect(response.status()).toBe(200);
       
-        return await response.json();
+      // Return the JSON content of the response
+      return await response.json();
     }
     
 }
