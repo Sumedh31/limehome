@@ -12,7 +12,7 @@ export class ApiSetup {
       });
     }
 
-    public async getPropertyDetails(): Promise<any> {
+    public async getPropertyDetails(): Promise<PropertyDetails> {
         const data = await this.fetchData(this.context, '/properties/v1/public/properties/129');
         return data;
     }
