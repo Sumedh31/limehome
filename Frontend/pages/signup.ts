@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import { generateRandomEmail, generateRandomFirstName, generateRandomLastName, generateRandomPassword } from '../utils/helper';
 
 export class Signup {
+    // Locators for signup form
     private email: Locator;
     private createAccountButton: Locator;
     private titleMr: Locator;
@@ -13,7 +14,7 @@ export class Signup {
     private firstAddressButton: Locator;
     private siteLogo: Locator;
 
-    // Address details
+    // Address details locators
     private address: Locator;
     private city: Locator;
     private stateSelect: Locator;
@@ -22,11 +23,11 @@ export class Signup {
     private phone: Locator;
     private mobilePhone: Locator;
     private saveAddressButton: Locator;
-    
+
     private page: Page;
 
-
     constructor(page: Page) {
+        // Initialize locators for signup form
         this.email = page.locator('input[id="email_create"]');
         this.createAccountButton = page.locator('button[id="SubmitCreate"]');
         this.titleMr = page.locator('[id="id_gender1"]');
@@ -35,10 +36,10 @@ export class Signup {
         this.lastName = page.locator('[id="customer_lastname"]');
         this.password = page.locator('[id="passwd"]');
         this.registerUserButton = page.locator('[id="submitAccount"]');
-        this.firstAddressButton = page.getByTitle('Add my first address', {exact: true});
+        this.firstAddressButton = page.getByTitle('Add my first address', { exact: true });
         this.siteLogo = page.locator('[id="header_logo"]');
 
-        // Address details
+        // Initialize locators for address details
         this.address = page.locator('[id="address1"]');
         this.city = page.locator('[id="city"]');
         this.stateSelect = page.locator('select[name="id_state"]');
@@ -50,19 +51,22 @@ export class Signup {
         this.page = page;
     }
 
+    // Register a new user with random email, password and address details
     public async registerNewUser() {
-        await this.registerUser();
-        await this.clickOnAddFirstAddress();
-        await this.fillAddressDetails();
+        await this.registerUser(); // Register user
+        await this.clickOnAddFirstAddress(); // Click on 'Add my first address'
+        await this.fillAddressDetails(); // Fill address details
 
-        // Go back to the home page
+        // Go back to the home page by clicking on the site logo
         await this.siteLogo.click();
     }
 
+    // Method to register a user with random email and password
     public async registerUser() {
-        const email = generateRandomEmail();
-        const password = generateRandomPassword();
+        const email = generateRandomEmail(); // Generate random email
+        const password = generateRandomPassword(); // Generate random password
 
+        // Fill signup form fields
         await this.email.fill(email);
         await this.createAccountButton.click();
         await this.titleMr.click();
@@ -71,12 +75,13 @@ export class Signup {
         await this.password.fill(password);
         await this.registerUserButton.click();
 
-        // Return the generated email and password
+        // Return the generated email and password for further use
         return { email, password };
     }
 
+    // Fill address details in the form
     public async fillAddressDetails() {
-        // Fill the address details
+        // Fill address details form fields
         await this.address.fill('123 Main Street');
         await this.city.fill('New York');
         await this.postcode.fill('10001');
@@ -87,6 +92,7 @@ export class Signup {
         await this.saveAddressButton.click();
     }
 
+    // Method to click on 'Add my first address' button
     public async clickOnAddFirstAddress() {
         await this.firstAddressButton.click();
     }
