@@ -41,7 +41,10 @@ test.describe('Search product tests', () => {
         await searchResults.ensureResultsAreDisplayed();
 
         // Step 2: Add two products to compare
-        const compareProducts = await searchResults.addTwoProductsToCompare();
+        const {firstProductPrice, secondProductPrice, compareProducts} = await searchResults.addTwoProductsToCompare();
+
+        // Step 3: Verify the products are added to compare and the prices match
         await compareProducts.verifyCorrectNumberOfProductsInCompare(2);
+        await compareProducts.verifyProductPricesMatch(firstProductPrice, secondProductPrice);
     });
 });

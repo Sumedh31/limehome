@@ -132,17 +132,28 @@ export class SearchResults {
     public async addTwoProductsToCompare() {
         const products = await this.getProductsFromResults();
         let count = 0;
+        let firstProductPrice = '';
+        let secondProductPrice = '';
         for (const product of products) {
             if (count < 2) {
                 await product.locator(this.addToCompare).click();
                 await expect(product.locator(this.addedToCompare)).toBeVisible();
                 count++;
+
+                const price = await product.locator(this.productPrice).innerText();
+                if (count === 1) {
+                    firstProductPrice = price;
+                } else if (count === 2) {
+                    secondProductPrice = price;
+                }
+
             } else {
                 break;
             }
         }
         await this.compareButton.first().click();
+        const compareProducts = new CompareProducts(this.page);
 
-        return new CompareProducts(this.page);
+        return { firstProductPrice, secondProductPrice, compareProducts };
     }
 }
