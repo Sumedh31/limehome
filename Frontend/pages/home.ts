@@ -10,7 +10,8 @@ export class Home {
 
 
     constructor(page: Page) {
-        this.signInButton = page.getByTitle('title="Log in to your customer account', {exact: true});
+        // Most buttons in DOM are not using button role so we can't use getByRole
+        this.signInButton = page.getByTitle('Log in to your customer account', {exact: true});
         this.searchInput = page.locator('[id="search_query_top"]');   
         this.searchSubmit = page.locator('[name="submit_search"]'); 
         this.page = page;

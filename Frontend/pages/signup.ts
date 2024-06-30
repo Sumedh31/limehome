@@ -10,6 +10,8 @@ export class Signup {
     private lastName: Locator;
     private password: Locator;
     private registerUserButton: Locator;
+    private firstAddressButton: Locator;
+    private siteLogo: Locator;
 
     // Address details
     private address: Locator;
@@ -33,6 +35,8 @@ export class Signup {
         this.lastName = page.locator('[id="customer_lastname"]');
         this.password = page.locator('[id="passwd"]');
         this.registerUserButton = page.locator('[id="submitAccount"]');
+        this.firstAddressButton = page.getByTitle('Add my first address', {exact: true});
+        this.siteLogo = page.locator('[id="header_logo"]');
 
         // Address details
         this.address = page.locator('[id="address1"]');
@@ -44,6 +48,15 @@ export class Signup {
         this.mobilePhone = page.locator('[id="phone_mobile"]');
         this.saveAddressButton = page.locator('[id="submitAddress"]');
         this.page = page;
+    }
+
+    public async registerNewUser() {
+        await this.registerUser();
+        await this.clickOnAddFirstAddress();
+        await this.fillAddressDetails();
+
+        // Go back to the home page
+        await this.siteLogo.click();
     }
 
     public async registerUser() {
@@ -72,5 +85,9 @@ export class Signup {
         await this.phone.fill('2125551234');
         await this.mobilePhone.fill('2125551234');
         await this.saveAddressButton.click();
+    }
+
+    public async clickOnAddFirstAddress() {
+        await this.firstAddressButton.click();
     }
 }

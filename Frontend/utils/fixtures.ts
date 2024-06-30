@@ -6,6 +6,7 @@ import { Signup } from '../pages/signup';
 
 export const test = baseTest.extend<{
     setup: SetupApp;
+    setupWithNewUser: SetupApp;
     home: Home;
     searchResults: SearchResults;
     signup: Signup;
@@ -15,6 +16,22 @@ export const test = baseTest.extend<{
         const setup = new SetupApp(page);
         await setup.setup();
         await use(setup);
+
+        // TearDown: Close the browser after the test
+        await page.close();
+
+
+    },
+
+    setupWithNewUser: async ({ page, home }, use) => {
+        const setup = new SetupApp(page);
+        await setup.setup();
+        const signUp = await home.clickOnSignInButton();
+        await signUp.registerNewUser();
+        await use(setup);
+
+        // TearDown: Close the browser after the test
+        await page.close();
     },
 
     // fixture for home page
