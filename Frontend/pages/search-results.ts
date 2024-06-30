@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { ProductDetails } from './product-details';
+import { CompareProducts } from './compare-products';
 
 export class SearchResults {
     private products: Locator;
@@ -8,6 +9,10 @@ export class SearchResults {
     private moreButton: Locator;
     private listView: Locator;
     private productSortSelect: Locator;
+    private addToCompare: Locator;
+    private addedToCompare: Locator;
+    private compareButton: Locator;
+    private compareContainer: Locator;
     private page: Page;
 
     constructor(page: Page) {
@@ -18,6 +23,9 @@ export class SearchResults {
         this.productAvailabilityIndicator = page.locator('[class="availability"]');
         this.moreButton = page.locator('a[class="button lnk_view btn btn-default"]');
         this.productSortSelect = page.locator('[id="selectProductSort"]');
+        this.addToCompare = page.locator('[class="add_to_compare"]');
+        this.addedToCompare = page.locator('[class="add_to_compare checked"]');
+        this.compareButton = page.locator('[class="compare-form"] [type="submit"]');
         this.page = page;
     }
 
@@ -118,5 +126,23 @@ export class SearchResults {
         // Verify that prices are sorted in ascending order
         // const sortedPrices = prices.slice().sort((a, b) => parseFloat(a.replace('$', '')) - parseFloat(b.replace('$', '')));
         // expect(prices).toEqual(sortedPrices);
+    }
+
+    // Add two products to compare
+    public async addTwoProductsToCompare() {
+        const products = await this.getProductsFromResults();
+        let count = 0;
+        for (const product of products) {
+            if (count < 2) {
+                await product.locator(this.addToCompare).click();
+                await expect(product.locator(this.addedToCompare)).toBeVisible();
+                count++;
+            } else {
+                break;
+            }
+        }
+        await this.compareButton.first().click();
+
+        return new CompareProducts(this.page);
     }
 }

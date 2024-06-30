@@ -35,4 +35,13 @@ test.describe('Search product tests', () => {
         await searchResults.verifyPriceLowToHigh();
     });
 
+    test('Verify you can compare products from search results', async ({ setup, home }) => {
+        // Step 1: Search for product
+        const searchResults = await home.searchForProductAndSubmit('dresses');
+        await searchResults.ensureResultsAreDisplayed();
+
+        // Step 2: Add two products to compare
+        const compareProducts = await searchResults.addTwoProductsToCompare();
+        await compareProducts.verifyCorrectNumberOfProductsInCompare(2);
+    });
 });
