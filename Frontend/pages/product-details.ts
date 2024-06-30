@@ -7,7 +7,8 @@ export class ProductDetails {
     private productSizeSelect: Locator;
     private proceedToCheckoutButton: Locator;
     private productPrice: Locator;
-
+    private continueShoppingButton: Locator;
+    private viewShoppingCartButton: Locator;
 
     private page: Page;
 
@@ -18,6 +19,8 @@ export class ProductDetails {
         this.addToCart = page.locator('[id="add_to_cart"]');
         this.proceedToCheckoutButton = page.getByTitle('Proceed to checkout');
         this.productPrice = page.locator('[id="our_price_display"]');
+        this.continueShoppingButton = page.getByTitle('Continue shopping');
+        this.viewShoppingCartButton = page.getByTitle('View my shopping cart');
         this.page = page;
     }
 
@@ -50,6 +53,16 @@ export class ProductDetails {
 
     public async proceedToCheckout() {
         await this.proceedToCheckoutButton.click();
+
+        return new CartCheckout(this.page);
+    }
+
+    public async continueShopping() {
+        await this.continueShoppingButton.click();
+    }
+
+    public async viewShoppingCart() {
+        await this.viewShoppingCartButton.click();
 
         return new CartCheckout(this.page);
     }

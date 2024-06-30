@@ -11,6 +11,11 @@ export class CartCheckout {
     private orderConfirmationMessage: Locator;
     private firstOrderFromHistory: Locator;
     private orderList: Locator;
+    private totalCartPrice: Locator;
+
+    // Cart order edit
+    private substractOrder: Locator;
+    private addOrder: Locator;
 
 
     private page: Page;
@@ -27,6 +32,11 @@ export class CartCheckout {
         this.orderConfirmationMessage = page.locator('[class="box"]');
         this.firstOrderFromHistory = page.locator('[id="order-list"] [class="first_item "]');
         this.orderList = page.locator('[id="order-list"]');
+        this.totalCartPrice = page.locator('[id="total_price"]');
+
+        // Cart order edit 
+        this.substractOrder = page.getByTitle('Subtract');
+        this.addOrder = page.getByTitle('Add');
         this.page = page;
     }
 
@@ -78,5 +88,32 @@ export class CartCheckout {
 
     public async continueCheckoutAfterShipping() {
         await this.proceedCheckoutAfterShipping.click();
+    }
+
+    public async getTotalCartPrice() {
+        const totalCartPrice = await this.totalCartPrice.innerText();
+        return parseFloat(totalCartPrice.replace('$', ''));;
+    }
+
+    public async editOrder() {
+        let cartPrice = await this.getTotalCartPrice();
+        await this.addOrder.first().click();
+        await this.addOrder.first().click();
+
+        await expect.poll(async () => await this.getTotalCartPrice(), {
+            timeout: 5000, // Time to wait before failing the test (in milliseconds)
+            message: 'Expected the total cart price to be greater than the specified cart price',
+          }).toBeGreaterThan(cartPrice);
+
+        cartPrice = await this.getTotalCartPrice();
+
+        await this.substractOrder.first().click();
+
+        await expect.poll(async () => await this.getTotalCartPrice(), {
+            timeout: 5000, // Time to wait before failing the test (in milliseconds)
+            message: 'Expected the total cart price to be less than the specified cart price',
+        }).toBeLessThan(cartPrice);
+
+        return cartPrice;
     }
 }
