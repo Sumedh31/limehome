@@ -7,7 +7,7 @@ test.describe('Complete checkout as guest user by signing up', () => {
     test('Logged out user should be able to add products in cart and complete checkout by signing up', async ({ setup, home, signup }) => {
 
         // Step 1: Search for product
-        const searchResults = await home.searchForProduct('dresses');
+        const searchResults = await home.searchForProductAndSubmit('dresses');
         await searchResults.ensureResultsAreDisplayed();
 
         // Step 2: Open first available product and add it to the cart

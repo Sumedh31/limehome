@@ -8,7 +8,7 @@ test.describe('Logged in user tests for cart checkout and cart edit', () => {
     test('User should be able to add products in cart as signed in user', async ({ setupWithNewUser, home }) => {
 
         // Step 1: Search for product
-        const searchResults = await home.searchForProduct('dresses');
+        const searchResults = await home.searchForProductAndSubmit('dresses');
         await searchResults.ensureResultsAreDisplayed();
 
         // Step 2: Open first available product and add it to the cart
@@ -39,7 +39,7 @@ test.describe('Logged in user tests for cart checkout and cart edit', () => {
     test('A signed-in user should be able to edit the cart', async ({ setupWithNewUser, home }) => {
 
         // Step 1: Search for product
-        const searchResults = await home.searchForProduct('dresses');
+        const searchResults = await home.searchForProductAndSubmit('dresses');
         await searchResults.ensureResultsAreDisplayed();
 
         // Step 2: Open first available product and add it to the cart

@@ -7,6 +7,7 @@ export class Home {
     private signInButton: Locator;
     private searchInput: Locator;
     private searchSubmit: Locator;
+    private searchSuggestions: Locator;
     private page: Page;
 
     constructor(page: Page) {
@@ -16,6 +17,7 @@ export class Home {
         this.signInButton = page.getByTitle('Log in to your customer account', { exact: true });
         this.searchInput = page.locator('[id="search_query_top"]');
         this.searchSubmit = page.locator('[name="submit_search"]');
+        this.searchSuggestions = page.locator('[class="ac_results"]');
         this.page = page;
     }
 
@@ -25,11 +27,27 @@ export class Home {
         return new Signup(this.page);
     }
 
+    // Searches for a product by entering a product name in the search input
+    public async searchForProduct(productName: string){
+        /**
+         Types each character of the productName into the search input. Using `press` instead of `fill` because 
+         filling in the search input with the full keyword does not trigger suggestions, requiring individual character simulation. */
+        for (const char of productName.split('')) {
+            await this.searchInput.press(char);
+        }
+    }
+
     // Enters a product name in the search input, presses Enter, and navigates to the SearchResults page
-    public async searchForProduct(productName: string): Promise<SearchResults> {
+    public async searchForProductAndSubmit(productName: string): Promise<SearchResults> {
         await this.searchInput.fill(productName);
-        await this.page.keyboard.press('Enter');
+        await this.searchSubmit.click();
         
         return new SearchResults(this.page);
+    }
+
+    // Verifies that relevant search suggestions are displayed
+    public async verifyRelevantSearchSuggestionsDisplayed(keyword: string) {
+        const searchSuggestions = (await this.searchSuggestions.innerText()).toLowerCase();
+        expect(searchSuggestions).toContain(keyword);
     }
 }

@@ -19,8 +19,6 @@ export const test = baseTest.extend<{
 
         // TearDown: Close the browser after the test
         await page.close();
-
-
     },
 
     setupWithNewUser: async ({ page, home }, use) => {
