@@ -18,12 +18,12 @@ test.describe('Property Details and Units Verification', () => {
 
   test.beforeEach(async ({ apiSetup }) => {
     // Fetch property details before each test
-    response =  await apiSetup.getPropertyDetails(propertyID);
+    response = await apiSetup.getPropertyDetails(propertyID);
     data = await response.json();
     propertyDetails = await data.payload;
   });
 
-  test('Verify Basic Information Of The Property Matches Expected Values', async ({ apiSetup }) => {
+  test('Verify Property Basic Information Matches Expected Values', async ({ apiSetup }) => {
     // Verify the API response status is 200
     expect(response.status()).toBe(200);
 
@@ -38,8 +38,8 @@ test.describe('Property Details and Units Verification', () => {
   test('Verify Check-In/Check-Out Times, Parking Details, and House Rules are Defined', async ({ apiSetup }) => {
     // Verify the API response status is 200
     expect(response.status()).toBe(200);
-    
-    // Verify the property has check-in, check-out times, parking details and house rules defined
+
+    // Verify the property has check-in, check-out times, parking details, and house rules defined
     expect(propertyDetails.default_check_in_time).not.toBe('');
     expect(propertyDetails.default_check_out_time).not.toBe('');
     expect(propertyDetails.parking).not.toBe('');
