@@ -1,11 +1,11 @@
 import { test } from '../utils/fixture';
-import { expect } from '@playwright/test';
+import { APIResponse, expect } from '@playwright/test';
 import { convertGermanToEnglish } from '../utils/helper';
 import { PropertyDetails } from '../utils/types';
 
 // Test Suite: Property Details and Units Verification
 test.describe('Property Details and Units Verification', () => {
-  // Property details for the test
+  // Property details for property with id 129
   const propertyID = 129;
   const propertyName = 'aachen vereinsstraße';
   const propertyCity = 'aachen';
@@ -13,13 +13,20 @@ test.describe('Property Details and Units Verification', () => {
   const propertyStreet = 'vereinsstraße';
 
   let propertyDetails: PropertyDetails;
+  let data: any;
+  let response: APIResponse;
 
   test.beforeEach(async ({ apiSetup }) => {
-    // Fetch property details
-    propertyDetails = await apiSetup.getPropertyDetails(propertyID);
+    // Fetch property details before each test
+    response =  await apiSetup.getPropertyDetails(propertyID);
+    data = await response.json();
+    propertyDetails = await data.payload;
   });
 
-  test('Verify Property Basic Information Matches Expected Values', async ({ apiSetup }) => {
+  test('Verify Basic Information Of The Property Matches Expected Values', async ({ apiSetup }) => {
+    // Verify the API response status is 200
+    expect(response.status()).toBe(200);
+
     // Verify the property details match the expected values
     expect(propertyDetails.name).toBe(propertyName);
     expect(propertyDetails.street.toLowerCase()).toContain(propertyStreet);
@@ -29,6 +36,9 @@ test.describe('Property Details and Units Verification', () => {
   });
 
   test('Verify Check-In/Check-Out Times, Parking Details, and House Rules are Defined', async ({ apiSetup }) => {
+    // Verify the API response status is 200
+    expect(response.status()).toBe(200);
+    
     // Verify the property has check-in, check-out times, parking details and house rules defined
     expect(propertyDetails.default_check_in_time).not.toBe('');
     expect(propertyDetails.default_check_out_time).not.toBe('');
@@ -37,6 +47,9 @@ test.describe('Property Details and Units Verification', () => {
   });
 
   test('Verify All Property Image URLs are Accessible and Return 200 Status', async ({ apiSetup, request }) => {
+    // Verify the API response status is 200
+    expect(response.status()).toBe(200);
+
     // Verify all property image URLs are accessible and return 200
     for (const image of propertyDetails.images) {
       const response = await request.get(image.url);
@@ -45,6 +58,9 @@ test.describe('Property Details and Units Verification', () => {
   });
 
   test('Verify Unit Details for Valid Information and Proper Associations', async ({ apiSetup }) => {
+    // Verify the API response status is 200
+    expect(response.status()).toBe(200);
+
     // Verify the property has units and the units have valid information and associations
     for (const unit of propertyDetails.unit_groups) {
       const unitSpaces = unit.spaces;

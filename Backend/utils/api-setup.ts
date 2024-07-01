@@ -1,5 +1,4 @@
-import { APIRequestContext, request, expect } from "@playwright/test";
-import {PropertyDetails} from "./types";
+import { APIRequestContext, request, expect, APIResponse } from "@playwright/test";
 
 export class ApiSetup {
     private context: Promise<APIRequestContext>;
@@ -18,9 +17,9 @@ export class ApiSetup {
      * @param id The ID of the property to fetch details for.
      * @returns A Promise resolving to PropertyDetails object containing property information.
      */
-    public async getPropertyDetails(id: number): Promise<PropertyDetails> {
-        const data = await this.fetchData(this.context, `/properties/v1/public/properties/${id}`);
-        return data.payload;
+    public async getPropertyDetails(id: number): Promise<APIResponse> {
+        const response = await this.get(this.context, `/properties/v1/public/properties/${id}`);
+        return response;
     }
     /**
      * Performs an HTTP GET request to fetch data from the specified URL.
@@ -28,18 +27,15 @@ export class ApiSetup {
      * @param url The URL to fetch data from.
      * @returns A Promise resolving to the JSON response data.
      */
-    public async fetchData(apiRequestContext: Promise<APIRequestContext>, url: string) {
+    public async get(apiRequestContext: Promise<APIRequestContext>, url: string): Promise<APIResponse> {
       // Wait for API request context to resolve
       const context = await apiRequestContext;
 
       // Send a GET request to the specified URL
       const response = await context.get(url);
-
-      // Assert that the response status is 200 (OK), failing the test if it's not
-      expect(response.status()).toBe(200);
-      
+     
       // Return the JSON content of the response
-      return await response.json();
+      return response;
     }
     
 }
