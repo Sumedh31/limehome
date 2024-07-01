@@ -9,6 +9,10 @@ This test suite is designed to validate the checkout process for guest users on 
 ## Running the Test
 1. run `yarn test` to tun the test
 
+## Reports
+
+The HTML report opens automatically upon the completion of tests. The results are saved in the ./html-test-results directory as the file index.html.
+
 ## Overview
 
 The test suite focuses on a critical user journey: completing a purchase as a guest user by signing up during the checkout process. It covers the following steps:

@@ -13,6 +13,10 @@ The API tests are designed to validate the responses, status codes, and data int
 ## Running the Test
 1. run `yarn test` to tun the test
 
+## Reports
+
+The HTML report opens automatically upon the completion of tests. The results are saved in the ./html-test-results directory as the file index.html.
+
 ## Test Suite: Property Details and Units Verification
 
 This specific test suite, `Property Details and Units Verification`, focuses on verifying the correctness and completeness of property details fetched from the backend. It covers the following aspects:
