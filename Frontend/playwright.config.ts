@@ -14,7 +14,7 @@ export default defineConfig({
     timeout: 5000,
   },
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['junit', { outputFile: 'test-results/results.xml' }], ['html', { outputFolder: 'test-results/html-reports' }]],
+  reporter: [['junit', { outputFile: 'test-results/results.xml' }], ['html', { outputFolder: 'html-reports/' , open: 'always'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */

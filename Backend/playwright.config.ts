@@ -3,6 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
+  workers: 4,
   /* Maximum time one test can run for. */
   timeout: 60 * 1000,
   expect: {
@@ -13,7 +14,7 @@ export default defineConfig({
     timeout: 5000,
   },
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['junit', { outputFile: 'test-results/results.xml' }], ['html', { outputFolder: 'html-test-results/' }]],
+  reporter: [['junit', { outputFile: 'test-results/results.xml' }], ['html', { outputFolder: 'html-test-results/' , open: 'always'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
