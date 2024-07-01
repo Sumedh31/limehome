@@ -15,7 +15,7 @@ The API tests are designed to validate the responses, status codes, and data int
 
 ## Reports
 
-The HTML report opens automatically upon the completion of tests. The results are saved in the ./html-test-results directory as the file index.html.
+The HTML report opens automatically upon the completion of tests. The results are saved in the `./html-test-results` directory as the file `index.html`.
 
 ## Test Suite: Property Details and Units Verification
 

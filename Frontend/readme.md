@@ -11,7 +11,7 @@ This test suite is designed to validate the checkout process for guest users on 
 
 ## Reports
 
-The HTML report opens automatically upon the completion of tests. The results are saved in the ./html-test-results directory as the file index.html.
+The HTML report opens automatically upon the completion of tests. The results are saved in the `./html-test-results` directory as the file `index.html`.
 
 ## Overview
 
