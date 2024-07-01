@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json.schemastore.org/package.json",
+    "name": "api-tests",
+    "description": "Runs api tests",
+    "type": "module",
+    "main": "index.js",
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+      "test": "playwright test"
+    },
+    "devDependencies": {
+      "@playwright/test": "1.44.1",
+      "@types/node": "20.12.12",
+      "typescript": "5.4.3"
+    },
+    "resolutions": {
+      "debug": "4.3.4"
+    },
+    "packageManager": "yarn@1.22.22"
+  }
+  
