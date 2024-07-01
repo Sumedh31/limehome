@@ -24,3 +24,4 @@ This specific test suite, `Property Details and Units Verification`, focuses on 
 - **Basic Information Matching**: Ensures that the basic details of a property, such as name, street, city, and country, match the expected values.
 - **Defined Check-In/Out Times and Amenities**: Verifies that properties have defined check-in/check-out times, parking details, and house rules.
 - **Image URL Accessibility**: Checks that all property image URLs are accessible and return a 200 status code.
+- **Unit Spaces and Amenities**: Checks that Unit spaces comes along proper information, spaces and amenities.
