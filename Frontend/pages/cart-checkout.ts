@@ -107,6 +107,8 @@ export class CartCheckout {
 
     // Edits the order in the cart by adding and subtracting items and verifies the cart price changes
     public async editOrder(): Promise<number> {
+        // Execution sometime fails due to slow network hence using waitForResponse for stability
+        await this.page.waitForResponse(async (response) => response.status() === 200, {timeout: 10000});
         let cartPrice = await this.getTotalCartPrice();
 
         // Add two items to the cart

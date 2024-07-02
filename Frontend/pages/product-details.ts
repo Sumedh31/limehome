@@ -3,6 +3,7 @@ import { CartCheckout } from './cart-checkout';
 
 export class ProductDetails {
     private addToCart: Locator;
+    private addedToCart: Locator;
     private productAvailibility: Locator;
     private productSizeSelect: Locator;
     private proceedToCheckoutButton: Locator;
@@ -17,6 +18,7 @@ export class ProductDetails {
         this.productSizeSelect = page.locator('select[name="group_1"]');
         this.productAvailibility = page.locator('[id="availability_value"]');
         this.addToCart = page.locator('[id="add_to_cart"]');
+        this.addedToCart = page.locator('[id="add_to_cart"] [class="exclusive added"]');
         this.proceedToCheckoutButton = page.getByTitle('Proceed to checkout');
         this.productPrice = page.locator('[id="our_price_display"]');
         this.continueShoppingButton = page.getByTitle('Continue shopping');
@@ -50,6 +52,9 @@ export class ProductDetails {
     // Add the selected product to the cart
     public async addProductToCart() {
         await this.addToCart.click();
+
+        // Ensure that the product has been added to the cart 
+        await expect(this.addedToCart).toBeVisible();
     }
 
     // Proceed to the checkout page

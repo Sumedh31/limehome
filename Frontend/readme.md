@@ -7,7 +7,10 @@ This test suite is designed to validate the checkout process for guest users on 
 2. run `yarn playwright install`
 
 ## Running the Test
+
 1. run `yarn test` to tun the test
+2. By default, the tests are run using a single worker. Running even two parallel nodes slows down the site and can cause the server to return 404 errors for some tests. Therefore, the default is set to 1 to run tests in serial mode. You can change the number of workers by running tests with `yarn test --workers=n`.
+
 
 ## Reports
 

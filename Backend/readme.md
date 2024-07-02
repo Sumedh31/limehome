@@ -12,6 +12,7 @@ The API tests are designed to validate the responses, status codes, and data int
 
 ## Running the Test
 1. run `yarn test` to tun the test
+2. The tests are run using 4 parallel workers by default. You can change the workers by running tests using `yarn test --workers=n`
 
 ## Reports
 
