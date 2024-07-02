@@ -4,7 +4,7 @@ Limehome challenge
 ## Testing Directory
 ##### [Search & Shopping - Product scenarios.pdf](./Testing%20/Search%20&%20Shopping%20-%20Product%20scenarios.pdf)
 
-This document outlines the product scenarios as described in the product stories.
+This document outlines the product scenarios described as stories.
 
 ##### [Test strategy.pdf](./Testing%20/Test%20strategy.pdf)
 
