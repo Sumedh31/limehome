@@ -27,6 +27,7 @@ The tests are run on Chrome, Firefox and Webkut browsers. The test suite focuses
 5. **Accept Terms and Continue**: Accepts terms and conditions and continues the checkout process after shipping details are provided.
 6. **Payment and Order Confirmation**: Makes payment via bank wire and confirms the order, capturing the order reference.
 7. **Verify Order Placement**: Navigates to order history to verify that the order was placed successfully using the captured order reference.
+8. **Search and Sorting**: Verify search and sort orders works correctly.
 
 ## Test Environment
 
