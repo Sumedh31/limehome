@@ -18,7 +18,7 @@ The HTML report opens automatically upon the completion of tests. The results ar
 
 ## Overview
 
-The test suite focuses on a critical user journey: completing a purchase as a guest user by signing up during the checkout process. It covers the following steps:
+The tests are run on Chrome, Firefox and Webkut browsers. The test suite focuses on a critical user journey: completing a purchase as a guest user by signing up during the checkout process. It covers the following steps:
 
 1. **Product Search**: Searches for a product and verifies that the search results are displayed.
 2. **Add Product to Cart**: Opens the first available product from the search results, selects a size, and adds it to the cart.

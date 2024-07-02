@@ -17,7 +17,7 @@ This document defines the overall test strategy, including the scenarios covered
 This report provides details of executed test cases, including a comprehensive test execution summary and identified issues.
 
 ## Frontend Directory
-This directory contains UI tests written in Playwright and TypeScript for the frontend. For more information on setting up and running these tests, refer to the [Readme](./Frontend/readme.md) 
+This directory contains UI tests written in Playwright and TypeScript for the frontend. The tests are executed on Chrom, Firfox and webkit. For more information on setting up and running these tests, refer to the [Readme](./Frontend/readme.md) 
 
 ## Backend Directory
 This directory contains API tests written in Playwright and TypeScript for the backend. These tests validate the correctness and integrity of the property details endpoint. For setup instructions and details on running these tests, refer to the [Readme](./Backend/readme.md) 
